@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqldiff PUBLIC "-//OpenMRS//DTD OpenMRS SQL Diff Config 1.0//EN" "http://resources.openmrs.org/doctype/sqldiff-1.0.dtd">
+
+<sqldiff version="1.0">
+	<help>
+		USE:
+			The diffs are ordered by data model version number.
+			The script can be run in a top down fashion and is
+			expected to not fail or overwrite old data
+		
+		EXPECT:
+			- "use business-database-name;" was called prior to
+			   calling this script
+	</help>
+
+
+	<diff>
+		<version>13.0-SNAPSHOT</version>
+		<author>rakshit</author>
+		<date></date>
+		<description></description>
+		<sql>
+		    <!-- DROP TABLE IF EXISTS appointment; -->
+			CREATE TABLE IF NOT EXISTS sensor_reading4(
+				encounter_id int(19) NOT NULL,
+				test_date date NOT NULL,
+				patient_id int(19) NOT NULL,
+				sensor_id int(19) NOT NULL,
+				  PRIMARY KEY (`encounter_id`)
+			) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+			
+			CREATE TABLE IF NOT EXISTS sensor_mapping2(
+				sensor_id int(19) NOT NULL,
+				sensor_name varchar(19) NOT NULL,
+				  PRIMARY KEY (`sensor_id`)
+			) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+			
+			CREATE TABLE IF NOT EXISTS sensor_concept(
+				sensor_id int(19) NOT NULL,
+				concept_id int(19) NOT NULL,
+				CONSTRAINT prime PRIMARY KEY (sensor_id,concept_id)
+			) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8; 
+			
+						
+	<!-- 		CREATE TABLE IF NOT EXISTS sensor_concept2(
+				sensor_id int(19) NOT NULL,
+				concept_id int(19) NOT NULL
+			) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8; 
+			
+			CREATE TABLE IF NOT EXISTS sensors(
+				sensor_id int(19) NOT NULL,
+				PRIMARY KEY (`sensor_id`)
+			) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8; -->
+			
+		</sql>
+	</diff>
+	
+
+	
+</sqldiff>
